@@ -64,3 +64,4 @@ for k in range(dim[0]):
             inv[i][k] = inv[i][k]-(inv[j][k]*upmat[i][j])
         inv[i][k]=inv[i][k]/upmat[i][i]
 print("Inverse of the matrix is: \n" ,inv)
+#save
