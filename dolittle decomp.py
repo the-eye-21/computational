@@ -12,7 +12,7 @@ for i in range(dim[0]):
     # i selects pivot element.
     # to check if pivot element is zero
     # remove this part from comments to add pivoting
-    if (upmat[i][i] == 0):
+    # if (upmat[i][i] == 0):
         # to swap rows in case pivot element is zero.
 
         #for k in range(i+1,dim[0]):
