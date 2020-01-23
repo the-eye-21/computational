@@ -1,6 +1,11 @@
 import numpy as np
-A = np.loadtxt(r'E:\code\gauss.txt')
+import sys
+A = np.loadtxt(sys.argv[1])
 dim = np.shape(A)
+print(A)
+#scaling.
+for i in range (dim[0]):
+    A[i] = A[i]/(np.min(abs(A[i])[np.nonzero(abs(A[i]))]))
 print(A)
 #splitting the matrix.
 [a,b]=np.split(A,[dim[0]],axis=1)
@@ -11,14 +16,14 @@ for i in range(dim[0]):
     # i selects pivot element.
     # to check if pivot element is zero
     # remove this part from comments to add pivoting
-    # if (upmat[i][i] == 0):
-        # to swap rows in case pivot element is zero.
-        #for k in range(i+1,dim[0]):
-            #if (upmat[k][i]!=0):               
-                #upmat[[i,k]]=upmat[[k,i]]
-                #lowmat[[i,k]]=lowmat[[k,i]]
-                #b[[i,k]]=b[[k,i]]
-                #break
+    if (upmat[i][i] == 0):
+        #to swap rows in case pivot element is zero.
+        for k in range(i+1,dim[0]):
+            if (upmat[k][i]!=0):               
+                upmat[[i,k]]=upmat[[k,i]]
+                lowmat[[i,k]]=lowmat[[k,i]]
+                b[[i,k]]=b[[k,i]]
+                break
     # after making sure that either pivot element is zero or there are no non-zero elements in that column
     # is also the code for Gauss elimination without pivoting
     if(upmat[i][i]!=0):
@@ -48,3 +53,6 @@ for k in range(dim1[0]):
             x[k][i] = x[k][i]-(x[k][j]*upmat[i][j])
         x[k][i]=x[k][i]/upmat[i][i]
 print("x solution vectors are: \n" ,x)
+
+
+

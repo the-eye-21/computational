@@ -1,5 +1,6 @@
 import numpy as np
-a = np.loadtxt(r'E:\code\lab2\mat1.txt')
+import sys
+a = np.loadtxt(sys.argv[1])
 dim = np.shape(a)
 if (dim[0]!=dim[1]):
     quit()
@@ -8,16 +9,6 @@ upmat=a
 lowmat = np.identity(dim[0])
 for i in range(dim[0]):
     # i selects pivot element.
-    # to check if pivot element is zero
-    # remove this part from comments to add pivoting
-    # if (upmat[i][i] == 0):
-        # to swap rows in case pivot element is zero.
-        #for k in range(i+1,dim[0]):
-            #if (upmat[k][i]!=0):               
-                #upmat[[i,k]]=upmat[[k,i]]
-                #lowmat[[i,k]]=lowmat[[k,i]]
-                #break
-    # after making sure that either pivot element is zero or there are no non-zero elements in that column
     # is also the code for Gauss elimination without pivoting
     if(upmat[i][i]!=0):
         for j in range(i+1, dim[0]):
