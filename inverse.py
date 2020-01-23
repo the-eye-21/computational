@@ -1,6 +1,8 @@
 import numpy as np
 A = np.loadtxt(r'gauss.txt')
 dim = np.shape(A)
+if (dim[0]!=dim[1]):
+    quit()
 print(A)
 upmat=a
 lowmat = np.identity(dim[0])
