@@ -1,5 +1,5 @@
 import numpy as np
-A = np.loadtxt(r'gauss.txt')
+A = np.loadtxt(r'E:\code\gauss.txt')
 dim = np.shape(A)
 print(A)
 #splitting the matrix.
