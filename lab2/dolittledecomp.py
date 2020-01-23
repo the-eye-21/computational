@@ -1,12 +1,9 @@
 import numpy as np
 import sys
-A = np.loadtxt(sys.argv[1])
+A = np.loadtxt(sys.argv[1]).astype(float)
 dim = np.shape(A)
 print(A)
-#scaling.
-for i in range (dim[0]):
-    A[i] = A[i]/(np.min(abs(A[i])[np.nonzero(abs(A[i]))]))
-print(A)
+
 #splitting the matrix.
 [a,b]=np.split(A,[dim[0]],axis=1)
 print(a,'\n',b)
@@ -34,7 +31,7 @@ for i in range(dim[0]):
     if(upmat[i][i]==0):
         print("no unique solution")
         quit()
-print("Upper Triangular Matrix is: \n",upmat,"\nLower Triangular Matrix is: \n",lowmat)
+print("Upper Triangular Matrix is: \n",np.round_(upmat,6),"\nLower Triangular Matrix is: \n",np.round_(lowmat,6))
 b=np.transpose(b)
 # transpose makes it easier to read *facepalm
 dim1 = np.shape(b)
@@ -44,7 +41,7 @@ for k in range(dim1[0]):
     for i in range(dim[0]):
         for j in range(i):
             ux[k][i] = ux[k][i]-(ux[k][j]*lowmat[i][j])
-print("\nux vectors are: \n", ux,'\n')
+print("\nux vectors are: \n",np.round_(ux,6),'\n')
 #back substitution for all equations
 x=ux
 for k in range(dim1[0]):
@@ -52,7 +49,7 @@ for k in range(dim1[0]):
         for j in range(i+1,dim[0]):
             x[k][i] = x[k][i]-(x[k][j]*upmat[i][j])
         x[k][i]=x[k][i]/upmat[i][i]
-print("x solution vectors are: \n" ,x)
+print("x solution vectors are: \n" ,np.round_(x,6))
 
 
 
