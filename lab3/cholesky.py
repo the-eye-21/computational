@@ -3,7 +3,7 @@ import sys
 import math
 import scipy as sp
 import scipy.linalg as la
-a = np.loadtxt(r'E:/code/gauss.txt')
+a = np.loadtxt(r'mat1.txt')
 dim = np.shape(a)
 print(a)
 #splitting the matrix.
@@ -27,28 +27,14 @@ for i in range(dim[0]):
           print('not positive definite')
           quit()
     L[i][i]=np.sqrt(L[i][i])
-print("L is" ,L)
+print("L is \n" ,L)
 
 #crossverification
 lol = la.cholesky(A,lower=True)
-print(lol)
-lowmat=L
-upmat = np.transpose(L)
-b=np.transpose(b)
-# transpose makes it easier to read *facepalm
-dim1 = np.shape(b)
-ux=b
-#forward substitution for all equations
-for k in range(dim1[0]):
-    for i in range(dim[0]):
-        for j in range(i):
-            ux[k][i] = ux[k][i]-(ux[k][j]*lowmat[i][j])
-print("\nux vectors are: \n",np.round_(ux,6),'\n')
-#back substitution for all equations
-x=ux
-for k in range(dim1[0]):
-    for i in range(dim[0]-1,-1,-1):
-        for j in range(i+1,dim[0]):
-            x[k][i] = x[k][i]-(x[k][j]*upmat[i][j])
-        x[k][i]=x[k][i]/upmat[i][i]
-print("x solution vectors are: \n" ,np.round_(x,6))
+print("cross verifying using scipy function, L is: \n",lol)
+
+U=np.transpose(L)
+print('Transpose of L is: \n',U)
+mu = np.matmul(L,U)
+print('product is: \n',mu)
+
