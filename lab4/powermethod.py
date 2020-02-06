@@ -1,31 +1,42 @@
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
+#reading input
 A= np.loadtxt(sys.argv[1])
 dim = np.shape(A)
+#initialise plot
 fig=plt.figure()
 plt.axis([0,1000,0,100])
+#solution from python functions
 ded = np.linalg.eig(A)
 print('def',ded[0],'\n',ded[1],file=open("output.txt","w"))
 b=np.ones(dim[0])
 bnext=b
 q=np.zeros((1000,2))
+#iterations
 for i in range(1000):
 	b=bnext
+	#multiplication
 	bnext=A@b
+	#normalisation factor
 	normfac=np.absolute(bnext@bnext)
 	bnext=bnext/normfac
+	#to compare bnext and b
 	div=np.divide(bnext,b)
 	div=div/div[0]
-	babs=np.abs(b)
+	#to find minimum
+	babs=np.abs(bnext)
 	bmin=np.min(babs)
-	b=b/bmin
-	ev=((A@b)@b)/(b@b)
+	bnext=bnext/bmin
+	#finding eigen value
+	ev=((A@bnext)@bnext)/(b@bnext)
 	print('[',ev,i,']',b,file=open("output.txt", "a"))
+	#saving to matrix
 	q[i]=(ev,i)
+	#plotting
 	plt.scatter(i,ev)
 	if (np.allclose(div,1,atol = 1e-6 	,rtol = 0)):
-		print(b,file=open("output.txt", "a"))
+		print(bnext,file=open("output.txt", "a"))
 		break
 bnext=np.ones(dim[0])
 A=np.linalg.inv(A)
