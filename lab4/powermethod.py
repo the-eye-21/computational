@@ -39,6 +39,8 @@ bnext=np.ones(dim[0])
 A=np.linalg.inv(A)
 plt.savefig('max.png')
 plt.show()
+fig=plt.figure()
+plt.axis([0,1000,0,100])
 for i in range(1000):
 	b=bnext
 	bnext=A@b
