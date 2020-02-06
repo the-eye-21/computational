@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\lab1",
+    "\\lab2",
+    "\\lab3"
   ],
-  "SelectedNode": "\\dolittle decomp.py",
+  "SelectedNode": "\\lab3\\cholesky.py",
   "PreviewInSolutionExplorer": false
 }

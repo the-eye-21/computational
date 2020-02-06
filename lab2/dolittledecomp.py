@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-A = np.loadtxt(sys.argv[1]).astype(float)
+A = np.loadtxt('E:/code/gauss.txt')
 dim = np.shape(A)
 print(A)
 
