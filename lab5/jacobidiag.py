@@ -22,8 +22,8 @@ def maxval(A):
 #givens rotation, input parameters are matrix and indices of element to be made zero
 def givrot(A,j,k):
     n=len(A)
-    if abs(A[j][k])<abs(A[k][k]-A[j][j])*1e-30:
-        t=A[j][k]/abs(A[k][k]-A[j][j])
+    if abs(A[j][k])<abs(A[k][k]-A[j][j])*1e-20:
+        t=0
     else:
         the=(A[k][k]-A[j][j])/(2*A[j][k])
         t=np.sign(the)/(np.abs(the)+sqrt((the**2)+1))
@@ -57,14 +57,12 @@ def givrot(A,j,k):
         A[k][i]=A[i][k]
 
     return A
-np.set_printoptions(precision=4)
 A=np.loadtxt(sys.argv[1])
 n=len(A)
 print(numpy.linalg.eig(A))
 for i in range (100000):
     aMax,k,l=maxval(A)
     if aMax<1e-100:
-        print(np.round(A,4),i,'done')
+        print(np.round(A,7),i,'done')
         quit()
     givrot(A,k,l)
-    print(A,i)
