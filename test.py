@@ -69,6 +69,7 @@ def jacobi(A, tol = 1.0e-9):
 	for i in range(num_iter):
 		max_n, k, l = maxval(A)
 		if max_n <= tol:
+			print(i)
 			return A, rot
 		rotate(A, rot, k, l)
 	
@@ -76,18 +77,11 @@ def jacobi(A, tol = 1.0e-9):
 
 
 if __name__ == "__main__":
-	
 	A=np.loadtxt(sys.argv[1])
-    print(scipy.linalg.eig(A))
-    n=len(A)
-    D, S = jacobi(A)
+	D, S = jacobi(A)
 	print("\nDiagonal Matrix:")
-	for i in range(n):
-		for j in range(n):
+	for i in range(len(A)):
+		for j in range(len(A)):
 			print("{:-10.3f}".format(D[i][j]), end = '')
 		print()
-	print("\nRotation Matrix:")
-	for i in range(n):
-		for j in range(n):
-			print("{:-10.3f}".format(S[i][j]), end = '')
-		print()
+

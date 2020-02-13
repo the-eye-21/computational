@@ -22,37 +22,39 @@ def maxval(A):
 #givens rotation, input parameters are matrix and indices of element to be made zero
 def givrot(A,j,k):
     n=len(A)
-    if abs(A[j][k])<1e-10:
+    if abs(A[j][k])<abs(A[k][k]-A[j][j])*1e-30:
         t=A[j][k]/abs(A[k][k]-A[j][j])
     else:
         the=(A[k][k]-A[j][j])/(2*A[j][k])
         t=np.sign(the)/(np.abs(the)+sqrt((the**2)+1))
+        if the <0:
+            t=-t
     c=1/(sqrt((t**2)+1))
     s=c*t
     tau=s/(1+c)
     temp=A[j][k]
     A[j][k]=0
-    A[k][j]=0
+    A[k][j]=A[j][k]
     A[j][j] -= t*temp
     A[k][k] += t*temp
-    for i in range(j):
+    for i in range(j): #i<j
         temp = A[i][j]
         A[i][j] = temp - s*(A[i][k] + tau*temp)
         A[j][i]=A[i][j]
         A[i][k] = A[i][k] + s*(temp - tau*A[i][k])
         A[k][i]=A[i][k]
-    for i in range(k+1,l):  # Case of k < i < l
-        temp = A[j][i]
-        A[j][i] = temp - s*(A[i][k] + tau*A[j][i])
-        A[i][j]=A[j][i]
+    for i in range(j+1,k):  #j<i<k
+        temp = A[i][j]
+        A[i][j] = temp - s*(A[i][k] + tau*A[i][j])
+        A[j][i]=A[i][j]
         A[i][k] = A[i][k] + s*(temp - tau*A[i][k])
         A[k][i]=A[i][k]
-    for i in range(l+1,n):  # Case of i > l
+    for i in range(k+1,n):  #i>k
         temp = A[j][i]
-        A[j][i] = temp - s*(A[k][i] + tau*temp)
-        A[i][j]=A[j][i]
-        A[k][i] = A[k][i] + s*(temp - tau*A[k][i])
-        A[i][k]=A[k][i]
+        A[i][j] = temp - s*(A[i][k] + tau*temp)
+        A[j][i]=A[i][j]
+        A[i][k] = A[i][k] + s*(temp - tau*A[i][k])
+        A[k][i]=A[i][k]
 
     return A
 np.set_printoptions(precision=4)
@@ -61,8 +63,8 @@ n=len(A)
 print(numpy.linalg.eig(A))
 for i in range (100000):
     aMax,k,l=maxval(A)
-    if aMax<1e-50:
-        print(np.round(A,8),i,'done')
+    if aMax<1e-100:
+        print(np.round(A,4),i,'done')
         quit()
     givrot(A,k,l)
-print(b)
+    print(A,i)
