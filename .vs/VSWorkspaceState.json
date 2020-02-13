@@ -3,8 +3,10 @@
     "",
     "\\lab1",
     "\\lab2",
-    "\\lab3"
+    "\\lab3",
+    "\\lab4",
+    "\\lab5"
   ],
-  "SelectedNode": "\\lab3\\cholesky.py",
+  "SelectedNode": "\\lab5\\jacobidiag.py",
   "PreviewInSolutionExplorer": false
 }
