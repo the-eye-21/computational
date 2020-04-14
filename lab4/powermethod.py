@@ -6,7 +6,6 @@ A= np.loadtxt(sys.argv[1])
 dim = np.shape(A)
 #initialise plot
 fig=plt.figure()
-plt.axis([0,1000,0,100])
 #solution from python functions
 ded = np.linalg.eig(A)
 print('def',ded[0],'\n',ded[1],file=open("output.txt","w"))
@@ -40,7 +39,6 @@ A=np.linalg.inv(A)
 plt.savefig('max.png')
 plt.show()
 fig=plt.figure()
-plt.axis([0,1000,0,100])
 for i in range(1000):
 	b=bnext
 	bnext=A@b
@@ -53,9 +51,8 @@ for i in range(1000):
 	b=b/bmin
 	ev1=((A@b)@b)/(b@b)
 	print('[',1/ev1,i,']',b,file=open("output.txt", "a"))
-	q[i]=(1/ev1,i)
 	plt.scatter(i,1/ev1)
 	if (np.allclose(div,1,atol = 1e-6 	,rtol = 0)):
-		print(b,file=open("output.txt", "a"))
+		print(1/ev1,b,file=open("output.txt", "a"))
 		break
 plt.savefig('min.png')

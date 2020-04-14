@@ -1,5 +1,5 @@
 import numpy as np
-a = np.loadtxt(r'E:\pythonfiles\gauss.txt')
+a = np.loadtxt(r'E:\code\lab1\gauss.txt')
 dim = np.shape(a)
 print(a)
 #scaling.

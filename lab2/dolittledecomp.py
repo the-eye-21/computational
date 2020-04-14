@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-A = np.loadtxt('E:/code/gauss.txt')
+A = np.loadtxt('E:/code/lab2/mat1.txt')
 dim = np.shape(A)
 print(A)
 
