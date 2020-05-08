@@ -40,8 +40,9 @@ a=t10[-1]
 b=t20[-1]
 Z=10*(200-(a-(b-a)))/(b-a)
 fin = shoot(douder,0,10,dx,40,Z)
+print(Z)
 plt.plot(x,fin,label = 'final shoot',color = 'g',marker = 'o')
-print(t10,t20,fin,Z,sep='\n')
+plt.legend(loc="upper left")
 plt.xlabel('x-coordinate')
 plt.ylabel('Temperature')
-plt.show()
+plt.savefig('shoot.png')

@@ -8,7 +8,7 @@ import matplotlib
 #Global Constants
 k = 6.6743 * (10**(-11))
 M = 1.989 * (10**30)
-step = 36000
+step = 3600
 
 #Taking position as an array and defining distance of a point from the origin
 def dist(x):
@@ -32,7 +32,6 @@ def RK4(r,v,t):
 	v3 = step*greq(r+0.5*r2,v+0.5*v2,t+0.5*step)
 	r4 = step*(v+v3)
 	v4 = step*greq(r+r3,v+v3,t+step)
-
 	rf = r + (r1+2*r2 + 2*r3 + r4)/6
 	vf = v + (v1 + 2*v2 + 2*v3 + v4)/6
 	return rf, vf, t+step
@@ -40,14 +39,14 @@ def RK4(r,v,t):
 #main
 
 r= np.array([0,107.48*(10**9)])
-v= np.array([39.5*(10**3),30000])
+v= np.array([35.5*(10**3),10000])
 t=0
 fig = plt.figure()
 x=[]
 y=[]
-for i in range(0,1000000):
+for i in range(0,300*24):
 	r,v,t = RK4(r,v,t)
 	x.append(r[0])
 	y.append(r[1])
 plt.plot(x,y)
-plt.show()
+plt.savefig('orbit1.png')
